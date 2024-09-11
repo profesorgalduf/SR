@@ -26,6 +26,60 @@
 <p><span style="font-family: arial, helvetica, sans-serif;">Todos estos comandos son de NetTools, no obstante una gran mayoría de sistemas operativos linux están optando por utilizar iproute2. Podemos encontrar equivalencias entre los comandos tradicionales de ifconfig y los comandos de iroute2 por ejemplo <a href="https://www.redeszone.net/tutoriales/servidores/configurar-linux-comando-ip-iproute2-suite/">aquí</a></span></p>
 <p><span style="font-family: arial, helvetica, sans-serif;">En este <a href="https://www.zeppelinux.es/como-utilizar-iproute2-en-lugar-de-ifconfig/">sitio web</a> encontraremos las comparativas y las diferentes formas de lanzar estos comandos con las dos utilidades.</span></p></div>
 
+    <div class="exe-text"><p><span style="font-family: arial, helvetica, sans-serif;"><strong><span style="font-size: 12pt;">1.5.2. Gestión de servicios</span></strong></span></p>
+<p><span style="font-family: arial, helvetica, sans-serif;">Para la gestión de los servicios se utiliza la utilidad <strong>service</strong> de la siguiente forma:</span></p>
+<p><span style="font-family: arial, helvetica, sans-serif;"># <strong>service</strong> <span style="color: #ff0000;"><strong>nombre-del-servicio</strong></span> [<strong><span style="color: #0000ff;">stop</span></strong>|<strong><span style="color: #0000ff;">start</span></strong>|<strong><span style="color: #0000ff;">force-load</span></strong>|<span style="color: #0000ff;"><strong>restart</strong>|<strong>status</strong></span>]</span></p>
+<p><span style="font-family: arial, helvetica, sans-serif;">Es muy importante que una vez que configuramos un servicio y lo arrancamos, start, luego debemos ver si este está funcionando correctamente. Para ello utilizamos el comando <strong>status</strong>, el cual nos dará el estado de funcionamiento del mismo.</span></p>
+<p></p>
+<p><span style="font-family: arial, helvetica, sans-serif;">Disponemos además de <strong>systemctl</strong> con el que podemos también levantar, parar, etc. los servicios. Veamos una comparativa:</span></p>
+<table border="1" style="width: 100%; height: 208px;">
+<tbody>
+<tr style="height: 26px;">
+<td style="width: 33.3333%; text-align: center; height: 26px;"><span style="color: #000080; font-family: arial, helvetica, sans-serif;"><strong>service</strong></span></td>
+<td style="width: 33.3333%; text-align: center; height: 26px;"><span style="color: #000080; font-family: arial, helvetica, sans-serif;"><strong>systemctl </strong></span></td>
+<td style="width: 33.3333%; text-align: center; height: 26px;"><span style="color: #000080; font-family: arial, helvetica, sans-serif;"><strong>Desctripción</strong></span></td>
+</tr>
+<tr style="height: 26px;">
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;"><strong>service name start</strong></span></td>
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;"><strong>systemctl start name.service</strong></span></td>
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;">Inicia un servicio.</span></td>
+</tr>
+<tr style="height: 26px;">
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;"><strong>service name stop</strong></span></td>
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;"><strong>systemctl stop name.service</strong></span></td>
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;">Detiene un servicio.</span></td>
+</tr>
+<tr style="height: 26px;">
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;"><strong>service name restart</strong></span></td>
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;"><strong>systemctl restart name.service</strong></span></td>
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;">Reinicia un servicio.</span></td>
+</tr>
+<tr style="height: 26px;">
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;"><strong>service name cond restart</strong></span></td>
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;"><strong>systemctl try-restart name.service</strong></span></td>
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;">Reinicia un servicio sólo si se está ejecutando.</span></td>
+</tr>
+<tr style="height: 26px;">
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;"><strong>service name reload</strong></span></td>
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;"><strong>systemctl reload name.service</strong></span></td>
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;">Vuelve a cargar la configuración.</span></td>
+</tr>
+<tr style="height: 26px;">
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;"><strong>service name status</strong></span></td>
+<td style="width: 33.3333%; height: 26px;">
+<p><span style="font-family: arial, helvetica, sans-serif;"><strong>systemctl status name.service</strong></span></p>
+<p><span style="font-family: arial, helvetica, sans-serif;"><strong>systemctl is-active name.service</strong></span></p>
+</td>
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;">Comprueba si un servicio se está ejecutando.</span></td>
+</tr>
+<tr style="height: 26px;">
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;"><strong>service --status-all</strong></span></td>
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;"><strong>systemctl list-units --type service --all</strong></span></td>
+<td style="width: 33.3333%; height: 26px;"><span style="font-family: arial, helvetica, sans-serif;">Muestra el estado de todos los servicios.</span></td>
+</tr>
+</tbody>
+</table>
+<p></p></div>
 </body>
 </html>
 
